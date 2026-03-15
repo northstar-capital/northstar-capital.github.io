@@ -662,7 +662,7 @@
           <p class="lead">Explore calculators, practical financial guides, market explainers, and clear visual tools built for modern readers who want fast answers and better decisions.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#tools">Start Exploring →</a>
-            <a class="btn btn-secondary" href="#calculator">View Calculators</a>
+            <a class="btn btn-secondary" href="calculator.html">View Calculators</a>
           </div>
 
           <div class="stats-grid">
@@ -752,7 +752,7 @@
 
         <div class="tools-grid">
           <div class="card tool-card reveal"><div class="icon-box">🐖</div><h3>Savings Planner</h3><p>Project how fast your cash buffer can grow with fixed monthly saving.</p></div>
-          <div class="card tool-card reveal"><div class="icon-box">📊</div><h3>Compound Growth</h3><p>Estimate long-term gains from regular investing and reinvestment.</p></div>
+          <a href="calculator.html" class="card tool-card reveal"><div class="icon-box">📊</div><h3>Compound Growth</h3><p>Estimate long-term gains from regular investing and reinvestment.</p></a>
           <div class="card tool-card reveal"><div class="icon-box">🏛</div><h3>Debt Payoff</h3><p>See how payment size changes your payoff time and interest burden.</p></div>
           <div class="card tool-card reveal"><div class="icon-box">💵</div><h3>Budget Splitter</h3><p>Break income into needs, wants, savings, and investing targets.</p></div>
           <div class="card tool-card reveal"><div class="icon-box">📉</div><h3>Net Worth Tracker</h3><p>Map assets and liabilities into one number that actually matters.</p></div>
@@ -761,69 +761,7 @@
       </div>
     </section>
 
-    <section class="section" id="calculator">
-      <div class="container calc-wrap">
-        <div class="card calc-panel reveal">
-          <div class="icon-box" style="background:rgba(52,211,153,0.12)">🧮</div>
-          <h3>Compound Growth Calculator</h3>
-          <p>Test how starting capital, monthly investing, and annual return shape your future balance.</p>
-
-          <div class="field">
-            <label for="startAmount">Starting amount</label>
-            <input id="startAmount" type="number" value="10000" />
-          </div>
-          <div class="field">
-            <label for="monthly">Monthly contribution</label>
-            <input id="monthly" type="number" value="500" />
-          </div>
-          <div class="field">
-            <label for="rate">Annual return (%)</label>
-            <input id="rate" type="number" value="8" />
-          </div>
-          <div class="field">
-            <label for="years">Years</label>
-            <input id="years" type="number" value="10" />
-          </div>
-        </div>
-
-        <div class="card calc-results reveal">
-          <div class="card" style="padding:18px; margin-bottom:18px; border-radius:20px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); box-shadow:none;">
-            <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px;">
-              <div style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#94a3b8; font-weight:700;">Advertisement</div>
-              <div style="font-size:12px; color:#64748b;">Calculator sponsor area</div>
-            </div>
-            <div style="min-height:120px; border-radius:18px; border:1px dashed rgba(255,255,255,0.14); display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, rgba(34,211,238,0.06), rgba(52,211,153,0.06)); color:#cbd5e1; text-align:center; padding:18px;">
-              <div>
-                <div style="font-weight:700; font-size:18px; margin-bottom:6px;">Ad space</div>
-                <div style="font-size:14px; color:#94a3b8; max-width:520px;">Your AdSense loader is installed. Replace this box with a real ad unit once you have an ad slot ID.</div>
-              </div>
-            </div>
-          </div>
-          <h3>Projected outcome</h3>
-          <p>A clean estimate for long-term growth based on the values you entered.</p>
-
-          <div class="result-grid" style="margin-top:20px;">
-            <div class="mini-card">
-              <div class="label">Future value</div>
-              <div class="big" id="futureValue">$0</div>
-            </div>
-            <div class="mini-card">
-              <div class="label">Total contributed</div>
-              <div class="big" id="contributions">$0</div>
-            </div>
-            <div class="mini-card">
-              <div class="label">Estimated growth</div>
-              <div class="big green" id="growth">$0</div>
-            </div>
-          </div>
-
-          <div class="tip-box">
-            <h3 style="font-size:20px;">Time compounds more than intensity.</h3>
-            <p>The strongest effect usually comes from consistency over time. Even moderate recurring contributions can create a large difference over a decade.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    
 
     <section class="section" id="guides">
       <div class="container">
@@ -873,7 +811,7 @@
             <h3>Useful tools</h3>
             <p>Interactive content gives users a reason to stay longer and move deeper through the site.</p>
             <div class="plan-list">
-              <div class="plan-item"><span class="check">✓</span><span>Compound calculator</span></div>
+              <div class="plan-item"><span class="check">✓</span><span>Dedicated calculator page</span></div>
               <div class="plan-item"><span class="check">✓</span><span>Savings planning ideas</span></div>
               <div class="plan-item"><span class="check">✓</span><span>Budget concepts</span></div>
               <div class="plan-item"><span class="check">✓</span><span>Visual dashboard blocks</span></div>
@@ -912,6 +850,50 @@
       </div>
     </section>
 
+    <section class="section" id="editorial">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow" style="color:#86efac;">Editorial</div>
+          <h2>Original finance content that gives the site real depth.</h2>
+          <p>This section makes the website feel like a real publisher property instead of a thin landing page. It helps with both quality perception and review readiness.</p>
+        </div>
+
+        <div class="card" style="padding:28px;">
+          <h3 style="margin:0; font-size:28px; letter-spacing:-0.03em;">How to think about building a stronger money system</h3>
+          <p style="margin-top:14px; color:var(--muted-2); line-height:1.9;">Most financial progress does not come from one perfect decision. It comes from a repeatable system: controlled spending, visible savings targets, lower exposure to bad debt, and long-term capital allocation that can survive emotional mistakes. A good finance website should help readers understand those systems clearly and quickly.</p>
+          <p style="margin-top:14px; color:var(--muted-2); line-height:1.9;">That is why the strongest finance tools are usually simple. A savings calculator is useful because it turns intention into numbers. A debt comparison is useful because it exposes drag. A budgeting framework is useful because it forces tradeoffs into the open. Readers stay longer on websites that reduce confusion instead of performing expertise.</p>
+          <p style="margin-top:14px; color:var(--muted-2); line-height:1.9;">This site is structured around those principles. It combines guides, calculators, and visual blocks so users can move between education and application without friction. The goal is not to overwhelm visitors with theory. The goal is to make the next financial step easier to see and easier to act on.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="site-info">
+      <div class="container">
+        <div class="features-grid">
+          <div class="card feature-card reveal">
+            <div class="icon-box">ℹ️</div>
+            <h3>About this site</h3>
+            <p>Northstar Capital publishes educational finance content, planning tools, and simple calculators designed to make financial concepts easier to understand.</p>
+          </div>
+          <div class="card feature-card reveal">
+            <div class="icon-box">✉️</div>
+            <h3>Contact</h3>
+            <p>Email: contact@northstar-capital.github.io<br />Response times may vary depending on message volume and topic complexity.</p>
+          </div>
+          <div class="card feature-card reveal">
+            <div class="icon-box">🔒</div>
+            <h3>Privacy</h3>
+            <p>This website may use basic analytics and advertising technology to understand traffic and support the site. Do not submit sensitive financial information through public forms.</p>
+          </div>
+          <div class="card feature-card reveal">
+            <div class="icon-box">⚖️</div>
+            <h3>Disclaimer</h3>
+            <p>Content is for informational and educational purposes only and should not be treated as financial, tax, legal, or investment advice tailored to your situation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="faq">
       <div class="container" style="max-width:1000px;">
         <div class="section-head reveal" style="text-align:center; margin-inline:auto;">
@@ -936,6 +918,8 @@
         <div class="muted" style="margin-top:6px; font-size:14px;">Modern finance tools, educational guides, and clean digital experiences.</div>
       </div>
       <div class="footer-links">
+        <a href="#editorial">Editorial</a>
+        <a href="#site-info">About</a>
         <a href="#tools">Tools</a>
         <a href="#guides">Guides</a>
         <a href="#compare">Compare</a>
@@ -945,48 +929,6 @@
   </footer>
 
   <script>
-    const startAmount = document.getElementById('startAmount');
-    const monthly = document.getElementById('monthly');
-    const rate = document.getElementById('rate');
-    const years = document.getElementById('years');
-    const futureValueEl = document.getElementById('futureValue');
-    const contributionsEl = document.getElementById('contributions');
-    const growthEl = document.getElementById('growth');
-
-    function formatCurrency(n) {
-      return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        maximumFractionDigits: 0
-      }).format(n);
-    }
-
-    function calculate() {
-      const P = Number(startAmount.value) || 0;
-      const PMT = Number(monthly.value) || 0;
-      const r = (Number(rate.value) || 0) / 100 / 12;
-      const n = (Number(years.value) || 0) * 12;
-
-      let futureValue = P * Math.pow(1 + r, n);
-      if (r > 0) {
-        futureValue += PMT * ((Math.pow(1 + r, n) - 1) / r);
-      } else {
-        futureValue += PMT * n;
-      }
-
-      const contributions = P + PMT * n;
-      const growth = futureValue - contributions;
-
-      futureValueEl.textContent = formatCurrency(futureValue);
-      contributionsEl.textContent = formatCurrency(contributions);
-      growthEl.textContent = formatCurrency(growth);
-    }
-
-    [startAmount, monthly, rate, years].forEach(input => {
-      input.addEventListener('input', calculate);
-    });
-    calculate();
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
