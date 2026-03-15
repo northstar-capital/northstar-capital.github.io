@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Northstar Capital — Calculator</title>
+  <meta name="description" content="Compound growth calculator and finance planning tools by Northstar Capital." />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4828354236438737"
+     crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #020617;
+      --panel: rgba(255,255,255,0.05);
+      --panel-strong: rgba(15,23,42,0.88);
+      --border: rgba(255,255,255,0.1);
+      --text: #ffffff;
+      --muted: #94a3b8;
+      --muted-2: #cbd5e1;
+      --cyan: #22d3ee;
+      --emerald: #34d399;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius-xl: 24px;
+      --radius-2xl: 32px;
+      --max: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(16,185,129,0.15), transparent 28%),
+        radial-gradient(circle at top left, rgba(34,211,238,0.12), transparent 25%),
+        linear-gradient(to bottom, #0f172a, #020617 30%);
+      color: var(--text);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(18px);
+      background: rgba(2,6,23,0.72);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 16px 0;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-icon {
+      width: 42px; height: 42px; border-radius: 16px; display: grid; place-items: center;
+      color: #00120b; font-weight: 800; background: linear-gradient(135deg, var(--emerald), var(--cyan));
+      box-shadow: 0 12px 28px rgba(52,211,153,0.18);
+    }
+    .brand small { display: block; color: var(--muted); font-size: 12px; }
+    .brand strong { font-size: 18px; letter-spacing: -0.02em; }
+
+    .nav-links { display: flex; gap: 28px; color: var(--muted-2); font-size: 14px; font-weight: 500; }
+    .nav-links a:hover { color: #fff; }
+    .nav-actions { display: flex; gap: 12px; align-items: center; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      height: 48px; padding: 0 20px; border-radius: 16px; font-weight: 600; font-size: 14px;
+      border: 1px solid transparent; cursor: pointer; transition: 0.25s ease;
+    }
+    .btn-primary { background: #fff; color: #020617; }
+    .btn-primary:hover { background: #e2e8f0; }
+    .btn-secondary { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); color: #fff; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+    .hero { padding: 56px 0 30px; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 28px; align-items: center; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px;
+      border: 1px solid rgba(52,211,153,0.2); background: rgba(52,211,153,0.1); color: #86efac; font-size: 14px;
+      margin-bottom: 22px;
+    }
+    h1 { margin: 0; font-size: clamp(40px, 5vw, 66px); line-height: 0.95; letter-spacing: -0.05em; }
+    .lead { color: var(--muted-2); font-size: 18px; line-height: 1.8; max-width: 760px; margin-top: 18px; }
+
+    .card {
+      background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius-xl);
+      box-shadow: var(--shadow); backdrop-filter: blur(10px);
+    }
+    .dashboard-card {
+      background: var(--panel-strong); border: 1px solid var(--border); border-radius: 22px; padding: 18px;
+    }
+    .dashboard-stack { display: grid; gap: 16px; }
+    .value-big { font-size: 34px; font-weight: 700; letter-spacing: -0.04em; margin-top: 4px; }
+    .muted { color: var(--muted); }
+    .progress {
+      width: 100%; height: 8px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; margin-top: 14px;
+    }
+    .progress > div { height: 100%; background: linear-gradient(90deg, var(--emerald), var(--cyan)); border-radius: 999px; }
+
+    section.section { padding: 24px 0 68px; }
+    .section-head { max-width: 760px; margin-bottom: 30px; }
+    .eyebrow {
+      color: #67e8f9; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.22em; margin-bottom: 12px;
+    }
+    h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.04; letter-spacing: -0.04em; }
+    .section-head p { margin-top: 14px; color: var(--muted-2); line-height: 1.8; font-size: 17px; }
+
+    .layout { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 20px; }
+    .calc-panel, .calc-results, .content-panel, .faq-card { padding: 24px; }
+    .icon-box {
+      width: 48px; height: 48px; border-radius: 16px; display: grid; place-items: center;
+      background: rgba(255,255,255,0.09); font-size: 20px; margin-bottom: 16px;
+    }
+    .calc-panel h3, .calc-results h3, .content-panel h3, .faq-card h3 { margin: 0; font-size: 22px; letter-spacing: -0.03em; }
+    .calc-panel p, .calc-results p, .content-panel p, .faq-card p {
+      margin: 12px 0 0; color: var(--muted-2); line-height: 1.8; font-size: 15px;
+    }
+
+    label { display: block; margin-bottom: 8px; color: var(--muted-2); font-size: 14px; font-weight: 500; }
+    input {
+      width: 100%; height: 48px; border-radius: 16px; border: 1px solid var(--border); background: rgba(15,23,42,0.95);
+      color: #fff; padding: 0 14px; font: inherit; outline: none;
+    }
+    input:focus { border-color: rgba(34,211,238,0.45); box-shadow: 0 0 0 4px rgba(34,211,238,0.08); }
+    .field + .field { margin-top: 14px; }
+
+    .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+    .mini-card {
+      border-radius: 18px; padding: 18px; border: 1px solid var(--border); background: rgba(255,255,255,0.05);
+    }
+    .mini-card .label { color: var(--muted); font-size: 14px; }
+    .mini-card .big { margin-top: 8px; font-size: 30px; font-weight: 700; letter-spacing: -0.04em; }
+    .big.green { color: #86efac; }
+
+    .tip-box {
+      margin-top: 18px; border-radius: 24px; border: 1px solid var(--border); padding: 22px;
+      background: linear-gradient(135deg, rgba(34,211,238,0.1), rgba(52,211,153,0.1));
+    }
+
+    .ad-box {
+      margin-bottom: 18px; padding: 18px; border-radius: 20px; background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1); box-shadow: none;
+    }
+    .ad-label-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+    .ad-label { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #94a3b8; font-weight: 700; }
+    .ad-hint { font-size: 12px; color: #64748b; }
+    .ad-space {
+      min-height: 120px; border-radius: 18px; border: 1px dashed rgba(255,255,255,0.14);
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, rgba(34,211,238,0.06), rgba(52,211,153,0.06));
+      color: #cbd5e1; text-align: center; padding: 18px;
+    }
+    .ad-space-title { font-weight: 700; font-size: 18px; margin-bottom: 6px; }
+    .ad-space-note { font-size: 14px; color: #94a3b8; max-width: 520px; }
+
+    .content-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .faq-grid { display: grid; gap: 14px; }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+
+    footer { border-top: 1px solid var(--border); padding: 26px 0 40px; margin-top: 10px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 24px; align-items: center; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 1100px) {
+      .hero-grid, .layout, .content-grid { grid-template-columns: 1fr; }
+      .result-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .nav-actions .btn-secondary { display: none; }
+      .result-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .hero { padding-top: 34px; }
+      h1 { line-height: 1.02; }
+      section.section { padding: 24px 0 54px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">$</div>
+        <div>
+          <small>Finance</small>
+          <strong>Northstar Capital</strong>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#calculator">Calculator</a>
+        <a href="#insights">Insights</a>
+        <a href="#faq">FAQ</a>
+      </div>
+
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="index.html">Back Home</a>
+        <a class="btn btn-primary" href="#calculator">Use Tool</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal show">
+          <div class="pill">✦ Dedicated calculator page</div>
+          <h1>Run the numbers clearly, then move back to the bigger financial picture.</h1>
+          <p class="lead">This page focuses on one core task: estimating compound growth with a cleaner layout, stronger readability, and enough surrounding content to feel like a real publisher tool page instead of a thin utility screen.</p>
+          <div style="display:flex; gap:14px; flex-wrap:wrap; margin-top:28px;">
+            <a class="btn btn-primary" href="#calculator">Open Calculator</a>
+            <a class="btn btn-secondary" href="index.html">Return to Homepage</a>
+          </div>
+        </div>
+
+        <div class="dashboard-stack reveal show">
+          <div class="dashboard-card">
+            <div class="muted">Tool focus</div>
+            <div class="value-big">Compound growth</div>
+            <p style="margin-top:10px; color:#cbd5e1; line-height:1.8;">A simple long-term model for recurring contributions, starting capital, and annual return assumptions.</p>
+          </div>
+          <div class="dashboard-card">
+            <div class="muted">Why it matters</div>
+            <div style="font-size:22px; font-weight:700; letter-spacing:-0.03em; margin-top:4px;">Consistency beats intensity</div>
+            <div class="progress"><div style="width:72%"></div></div>
+            <p style="margin-top:10px; color:#cbd5e1; line-height:1.8;">Small recurring contributions often create more durable long-term growth than irregular bursts of effort.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="calculator">
+      <div class="container layout">
+        <div class="card calc-panel reveal">
+          <div class="icon-box" style="background:rgba(52,211,153,0.12)">🧮</div>
+          <h3>Compound Growth Calculator</h3>
+          <p>Enter a starting balance, monthly contribution, annual return, and number of years to project a rough long-term outcome.</p>
+
+          <div class="field">
+            <label for="startAmount">Starting amount</label>
+            <input id="startAmount" type="number" value="10000" />
+          </div>
+          <div class="field">
+            <label for="monthly">Monthly contribution</label>
+            <input id="monthly" type="number" value="500" />
+          </div>
+          <div class="field">
+            <label for="rate">Annual return (%)</label>
+            <input id="rate" type="number" value="8" />
+          </div>
+          <div class="field">
+            <label for="years">Years</label>
+            <input id="years" type="number" value="10" />
+          </div>
+        </div>
+
+        <div class="card calc-results reveal">
+          <div class="ad-box">
+            <div class="ad-label-row">
+              <div class="ad-label">Ad Space</div>
+              <div class="ad-hint">Calculator sponsor area</div>
+            </div>
+            <div class="ad-space">
+              <div>
+                <div class="ad-space-title">Ad Space</div>
+                <div class="ad-space-note">The AdSense loader is installed for this page. Replace this box with a live ad unit only after you have a slot ID and the site is approved.</div>
+              </div>
+            </div>
+          </div>
+
+          <h3>Projected outcome</h3>
+          <p>A clean estimate for long-term growth based on the values you entered.</p>
+
+          <div class="result-grid">
+            <div class="mini-card">
+              <div class="label">Future value</div>
+              <div class="big" id="futureValue">$0</div>
+            </div>
+            <div class="mini-card">
+              <div class="label">Total contributed</div>
+              <div class="big" id="contributions">$0</div>
+            </div>
+            <div class="mini-card">
+              <div class="label">Estimated growth</div>
+              <div class="big green" id="growth">$0</div>
+            </div>
+          </div>
+
+          <div class="tip-box">
+            <h3 style="font-size:20px;">Time compounds more than intensity.</h3>
+            <p>The strongest effect usually comes from consistency over time. Even moderate recurring contributions can create a large difference over a decade.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="insights">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Insights</div>
+          <h2>Why a separate calculator page makes the site stronger.</h2>
+          <p>Splitting the tool away from the homepage creates a clearer publisher structure, gives the calculator more breathing room, and makes the homepage feel less like a thin utility page.</p>
+        </div>
+
+        <div class="content-grid">
+          <div class="card content-panel reveal">
+            <h3>Clarity for readers</h3>
+            <p>Users arriving for content can stay on a cleaner editorial homepage, while users who want a tool can go directly to a dedicated page with less distraction.</p>
+          </div>
+          <div class="card content-panel reveal">
+            <h3>Better site structure</h3>
+            <p>Multiple distinct pages make the site feel more complete and less compressed. That usually helps both trust and navigation.</p>
+          </div>
+          <div class="card content-panel reveal">
+            <h3>More natural ad separation</h3>
+            <p>A dedicated tool page gives you more control over where monetization appears without crowding the main editorial experience.</p>
+          </div>
+          <div class="card content-panel reveal">
+            <h3>Stronger content depth</h3>
+            <p>Publisher sites usually benefit from distinct page purposes: homepage, tools, articles, and informational trust pages.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container" style="max-width:1000px;">
+        <div class="section-head reveal" style="text-align:center; margin-inline:auto;">
+          <div class="eyebrow" style="color:#86efac;">FAQ</div>
+          <h2>Quick answers for calculator users.</h2>
+        </div>
+
+        <div class="faq-grid">
+          <div class="card faq-card reveal"><h3>Does this calculator guarantee results?</h3><p>No. It is a simplified projection tool and should be used for rough planning, not as a promise of actual investment performance.</p></div>
+          <div class="card faq-card reveal"><h3>Why is annual return adjustable?</h3><p>Different assets, strategies, and time periods perform differently. A flexible assumption is more useful than pretending one fixed rate is always correct.</p></div>
+          <div class="card faq-card reveal"><h3>Why split this tool onto its own page?</h3><p>It improves structure, readability, and site depth while making the homepage feel more like a true content-led website.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <div style="font-size:18px; font-weight:700;">Northstar Capital</div>
+        <div class="muted" style="margin-top:6px; font-size:14px;">Financial tools, educational content, and clean web experiences.</div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="#calculator">Calculator</a>
+        <a href="#insights">Insights</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const startAmount = document.getElementById('startAmount');
+    const monthly = document.getElementById('monthly');
+    const rate = document.getElementById('rate');
+    const years = document.getElementById('years');
+    const futureValueEl = document.getElementById('futureValue');
+    const contributionsEl = document.getElementById('contributions');
+    const growthEl = document.getElementById('growth');
+
+    function formatCurrency(n) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        maximumFractionDigits: 0
+      }).format(n);
+    }
+
+    function calculate() {
+      const P = Number(startAmount.value) || 0;
+      const PMT = Number(monthly.value) || 0;
+      const r = (Number(rate.value) || 0) / 100 / 12;
+      const n = (Number(years.value) || 0) * 12;
+
+      let futureValue = P * Math.pow(1 + r, n);
+      if (r > 0) {
+        futureValue += PMT * ((Math.pow(1 + r, n) - 1) / r);
+      } else {
+        futureValue += PMT * n;
+      }
+
+      const contributions = P + PMT * n;
+      const growth = futureValue - contributions;
+
+      futureValueEl.textContent = formatCurrency(futureValue);
+      contributionsEl.textContent = formatCurrency(contributions);
+      growthEl.textContent = formatCurrency(growth);
+    }
+
+    [startAmount, monthly, rate, years].forEach(input => {
+      input.addEventListener('input', calculate);
+    });
+    calculate();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
