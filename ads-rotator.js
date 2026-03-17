@@ -1,5 +1,5 @@
 (function () {
-  const SESSION_KEY = "northstar_rotator_v2";
+  const SESSION_KEY = "northstar_rotator_v3";
   const SESSION_TTL_MS = 30 * 60 * 1000;
 
   function randInt(min, max) {
@@ -55,7 +55,7 @@
 
   const config = {
     goodSlots: {
-      calculatorTop: ["adsterraNative", "adsenseDisplay"]
+      calculatorTop: ["adsterraNativeBanner", "adsenseDisplay"]
     },
     aggressiveTypes: {
       overlay: ["propellerVignette"],
@@ -103,24 +103,42 @@
     saveState(state);
   }
 
-  function renderAdsterraNative(container) {
+  function clearNode(node) {
+    while (node.firstChild) {
+      node.removeChild(node.firstChild);
+    }
+  }
+
+  function renderAdsterraNativeBanner(container) {
     if (!container) return;
-    container.innerHTML = `
-      <script async="async" data-cfasync="false" src="https://pl28933884.effectivegatecpm.com/e821b7ed43b19695ac76a080b82fb3af/invoke.js"><\/script>
-      <div id="container-e821b7ed43b19695ac76a080b82fb3af"></div>
-    `;
+
+    clearNode(container);
+
+    const adWrap = document.createElement("div");
+    adWrap.id = "container-e821b7ed43b19695ac76a080b82fb3af";
+    container.appendChild(adWrap);
+
+    const s = document.createElement("script");
+    s.async = true;
+    s.setAttribute("data-cfasync", "false");
+    s.src = "https://pl28933884.effectivegatecpm.com/e821b7ed43b19695ac76a080b82fb3af/invoke.js";
+    container.appendChild(s);
   }
 
   function renderAdsensePlaceholder(container) {
     if (!container) return;
-    container.innerHTML = `
-      <div class="ad-space">
-        <div>
-          <div class="ad-space-title">Ad Space</div>
-          <div class="ad-space-note">Add your real AdSense display unit here when you have a slot ID.</div>
-        </div>
+
+    clearNode(container);
+
+    const box = document.createElement("div");
+    box.className = "ad-space";
+    box.innerHTML = `
+      <div>
+        <div class="ad-space-title">Ad Space</div>
+        <div class="ad-space-note">Add your real AdSense display unit here when you have a slot ID.</div>
       </div>
     `;
+    container.appendChild(box);
   }
 
   function renderGoodSlot(slotName, containerId) {
@@ -129,8 +147,8 @@
 
     const network = getCurrentGoodNetwork(slotName);
 
-    if (network === "adsterraNative") {
-      renderAdsterraNative(container);
+    if (network === "adsterraNativeBanner") {
+      renderAdsterraNativeBanner(container);
       advanceGoodSlot(slotName);
       return;
     }
@@ -141,7 +159,7 @@
       return;
     }
 
-    container.innerHTML = "";
+    clearNode(container);
   }
 
   function loadScriptOnce(id, src, attrs = {}) {
