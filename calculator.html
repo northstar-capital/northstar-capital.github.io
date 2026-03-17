@@ -5,17 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Northstar Capital — Calculator</title>
   <meta name="description" content="Compound growth calculator and finance planning tools by Northstar Capital." />
-
-  <!-- AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4828354236438737"
-     crossorigin="anonymous"></script>
-
-  <!-- Propeller Vignette -->
-  <script>(function(s){s.dataset.zone='10742966',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-
-  <!-- Propeller Push -->
-  <script src="https://5gvci.com/act/files/tag.min.js?z=10742973" data-cfasync="false" async></script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -255,12 +244,7 @@
               <div class="ad-label">Ad Space</div>
               <div class="ad-hint">Calculator sponsor area</div>
             </div>
-            <div class="ad-space">
-              <div>
-                <div class="ad-space-title">Ad Space</div>
-                <div class="ad-space-note">Replace this box later with a live display unit or rotating ad system.</div>
-              </div>
-            </div>
+            <div id="calculator-top-ad"></div>
           </div>
 
           <h3>Projected outcome</h3>
@@ -337,6 +321,7 @@
     </div>
   </footer>
 
+  <script src="ads-rotator.js"></script>
   <script>
     const startAmount = document.getElementById('startAmount');
     const monthly = document.getElementById('monthly');
@@ -387,6 +372,9 @@
     }, { threshold: 0.14 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    NorthstarAds.renderGoodSlot("calculatorTop", "calculator-top-ad");
+    NorthstarAds.bootAggressiveAds();
   </script>
 </body>
 </html>
