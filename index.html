@@ -5,17 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Northstar Capital</title>
   <meta name="description" content="Finance guides, calculators, and planning tools by Northstar Capital." />
-
-  <!-- AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4828354236438737"
-     crossorigin="anonymous"></script>
-
-  <!-- Propeller Vignette -->
-  <script>(function(s){s.dataset.zone='10742966',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-
-  <!-- Propeller Push -->
-  <script src="https://5gvci.com/act/files/tag.min.js?z=10742973" data-cfasync="false" async></script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -217,20 +206,13 @@
       color: var(--muted-2); font-size: 15px;
     }
     .check { color: #86efac; font-weight: 700; }
-    .cta-box {
-      border-radius: 40px; border: 1px solid var(--border);
-      background: linear-gradient(90deg, rgba(52,211,153,0.1), rgba(34,211,238,0.1), rgba(255,255,255,0.05));
-      padding: 34px;
-    }
-    .cta-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 20px; align-items: center; }
-    .faq-grid { grid-template-columns: 1fr; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
     footer { border-top: 1px solid var(--border); padding: 26px 0 40px; margin-top: 10px; }
     .footer-inner { display: flex; justify-content: space-between; gap: 24px; align-items: center; }
     .footer-links { display: flex; flex-wrap: wrap; gap: 18px; color: var(--muted); font-size: 14px; }
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.show { opacity: 1; transform: translateY(0); }
     @media (max-width: 1100px) {
-      .hero-grid, .cta-grid { grid-template-columns: 1fr; }
+      .hero-grid { grid-template-columns: 1fr; }
       .features-grid { grid-template-columns: repeat(2, 1fr); }
       .tools-grid, .guides-grid, .compare-grid, .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -241,7 +223,6 @@
       .guides-top, .compare-top, .footer-inner { flex-direction: column; align-items: flex-start; }
       .hero { padding-top: 34px; }
       h1 { line-height: 1.02; }
-      .cta-box { padding: 24px; border-radius: 28px; }
       section.section { padding: 28px 0 56px; }
     }
   </style>
@@ -525,6 +506,7 @@
     </div>
   </footer>
 
+  <script src="ads-rotator.js"></script>
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -533,6 +515,8 @@
     }, { threshold: 0.14 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    NorthstarAds.bootAggressiveAds();
   </script>
 </body>
 </html>
