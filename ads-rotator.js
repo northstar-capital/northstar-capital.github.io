@@ -1,10 +1,6 @@
 (function () {
-  const SESSION_KEY = "northstar_rotator_v3";
+  const SESSION_KEY = "northstar_rotator_v4";
   const SESSION_TTL_MS = 30 * 60 * 1000;
-
-  function randInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
 
   function now() {
     return Date.now();
@@ -27,79 +23,25 @@
     sessionStorage.setItem(SESSION_KEY, JSON.stringify(state));
   }
 
-  function makeState(config) {
-    const state = {
+  function makeState() {
+    return {
       createdAt: now(),
-      goodSlots: {},
-      aggressiveTypes: {}
+      aggressiveTypes: {
+        overlay: {
+          order: ["propellerVignette"],
+          currentIndex: 0
+        },
+        notification: {
+          order: ["propellerPush"],
+          currentIndex: 0
+        }
+      }
     };
-
-    for (const slotName of Object.keys(config.goodSlots)) {
-      state.goodSlots[slotName] = {
-        order: [...config.goodSlots[slotName]],
-        currentIndex: 0,
-        shown: 0,
-        limit: randInt(2, 4)
-      };
-    }
-
-    for (const typeName of Object.keys(config.aggressiveTypes)) {
-      state.aggressiveTypes[typeName] = {
-        order: [...config.aggressiveTypes[typeName]],
-        currentIndex: 0
-      };
-    }
-
-    return state;
   }
-
-  const config = {
-    goodSlots: {
-      calculatorTop: ["adsterraNativeBanner", "adsenseDisplay"]
-    },
-    aggressiveTypes: {
-      overlay: ["propellerVignette"],
-      notification: ["propellerPush"]
-    }
-  };
 
   let state = loadState();
   if (!state) {
-    state = makeState(config);
-    saveState(state);
-  }
-
-  function getCurrentGoodNetwork(slotName) {
-    const slot = state.goodSlots[slotName];
-    if (!slot) return null;
-    return slot.order[slot.currentIndex] || null;
-  }
-
-  function advanceGoodSlot(slotName) {
-    const slot = state.goodSlots[slotName];
-    if (!slot) return;
-
-    slot.shown += 1;
-
-    if (slot.shown >= slot.limit) {
-      slot.currentIndex = (slot.currentIndex + 1) % slot.order.length;
-      slot.shown = 0;
-      slot.limit = randInt(2, 4);
-    }
-
-    saveState(state);
-  }
-
-  function getCurrentAggressiveNetwork(typeName) {
-    const type = state.aggressiveTypes[typeName];
-    if (!type) return null;
-    return type.order[type.currentIndex] || null;
-  }
-
-  function rotateAggressive(typeName) {
-    const type = state.aggressiveTypes[typeName];
-    if (!type) return;
-    type.currentIndex = (type.currentIndex + 1) % type.order.length;
+    state = makeState();
     saveState(state);
   }
 
@@ -125,41 +67,26 @@
     container.appendChild(s);
   }
 
-  function renderAdsensePlaceholder(container) {
-    if (!container) return;
-
-    clearNode(container);
-
-    const box = document.createElement("div");
-    box.className = "ad-space";
-    box.innerHTML = `
-      <div>
-        <div class="ad-space-title">Ad Space</div>
-        <div class="ad-space-note">Add your real AdSense display unit here when you have a slot ID.</div>
-      </div>
-    `;
-    container.appendChild(box);
-  }
-
   function renderGoodSlot(slotName, containerId) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    const network = getCurrentGoodNetwork(slotName);
-
-    if (network === "adsterraNativeBanner") {
+    if (slotName === "calculatorTop") {
       renderAdsterraNativeBanner(container);
-      advanceGoodSlot(slotName);
-      return;
     }
+  }
 
-    if (network === "adsenseDisplay") {
-      renderAdsensePlaceholder(container);
-      advanceGoodSlot(slotName);
-      return;
-    }
+  function getCurrentAggressiveNetwork(typeName) {
+    const type = state.aggressiveTypes[typeName];
+    if (!type) return null;
+    return type.order[type.currentIndex] || null;
+  }
 
-    clearNode(container);
+  function rotateAggressive(typeName) {
+    const type = state.aggressiveTypes[typeName];
+    if (!type) return;
+    type.currentIndex = (type.currentIndex + 1) % type.order.length;
+    saveState(state);
   }
 
   function loadScriptOnce(id, src, attrs = {}) {
