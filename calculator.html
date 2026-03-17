@@ -5,11 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Northstar Capital — Calculator</title>
   <meta name="description" content="Compound growth calculator and finance planning tools by Northstar Capital." />
+
+  <!-- AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4828354236438737"
      crossorigin="anonymous"></script>
+
+  <!-- Propeller Vignette -->
+  <script>(function(s){s.dataset.zone='10742966',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+  <!-- Propeller Push -->
+  <script src="https://5gvci.com/act/files/tag.min.js?z=10742973" data-cfasync="false" async></script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg: #020617;
@@ -26,7 +36,6 @@
       --radius-2xl: 32px;
       --max: 1200px;
     }
-
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
@@ -38,19 +47,14 @@
         linear-gradient(to bottom, #0f172a, #020617 30%);
       color: var(--text);
     }
-
     a { color: inherit; text-decoration: none; }
     .container { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
-
     .nav {
       position: sticky; top: 0; z-index: 100;
-      backdrop-filter: blur(18px);
-      background: rgba(2,6,23,0.72);
+      backdrop-filter: blur(18px); background: rgba(2,6,23,0.72);
       border-bottom: 1px solid var(--border);
     }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 16px 0;
-    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 16px 0; }
     .brand { display: flex; align-items: center; gap: 12px; }
     .brand-icon {
       width: 42px; height: 42px; border-radius: 16px; display: grid; place-items: center;
@@ -59,11 +63,9 @@
     }
     .brand small { display: block; color: var(--muted); font-size: 12px; }
     .brand strong { font-size: 18px; letter-spacing: -0.02em; }
-
     .nav-links { display: flex; gap: 28px; color: var(--muted-2); font-size: 14px; font-weight: 500; }
     .nav-links a:hover { color: #fff; }
     .nav-actions { display: flex; gap: 12px; align-items: center; }
-
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       height: 48px; padding: 0 20px; border-radius: 16px; font-weight: 600; font-size: 14px;
@@ -73,17 +75,15 @@
     .btn-primary:hover { background: #e2e8f0; }
     .btn-secondary { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); color: #fff; }
     .btn-secondary:hover { background: rgba(255,255,255,0.1); }
-
     .hero { padding: 56px 0 30px; }
     .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 28px; align-items: center; }
     .pill {
       display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px;
-      border: 1px solid rgba(52,211,153,0.2); background: rgba(52,211,153,0.1); color: #86efac; font-size: 14px;
-      margin-bottom: 22px;
+      border: 1px solid rgba(52,211,153,0.2); background: rgba(52,211,153,0.1); color: #86efac;
+      font-size: 14px; margin-bottom: 22px;
     }
     h1 { margin: 0; font-size: clamp(40px, 5vw, 66px); line-height: 0.95; letter-spacing: -0.05em; }
     .lead { color: var(--muted-2); font-size: 18px; line-height: 1.8; max-width: 760px; margin-top: 18px; }
-
     .card {
       background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius-xl);
       box-shadow: var(--shadow); backdrop-filter: blur(10px);
@@ -95,18 +95,18 @@
     .value-big { font-size: 34px; font-weight: 700; letter-spacing: -0.04em; margin-top: 4px; }
     .muted { color: var(--muted); }
     .progress {
-      width: 100%; height: 8px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; margin-top: 14px;
+      width: 100%; height: 8px; background: rgba(255,255,255,0.08); border-radius: 999px;
+      overflow: hidden; margin-top: 14px;
     }
     .progress > div { height: 100%; background: linear-gradient(90deg, var(--emerald), var(--cyan)); border-radius: 999px; }
-
     section.section { padding: 24px 0 68px; }
     .section-head { max-width: 760px; margin-bottom: 30px; }
     .eyebrow {
-      color: #67e8f9; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.22em; margin-bottom: 12px;
+      color: #67e8f9; font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.22em; margin-bottom: 12px;
     }
     h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.04; letter-spacing: -0.04em; }
     .section-head p { margin-top: 14px; color: var(--muted-2); line-height: 1.8; font-size: 17px; }
-
     .layout { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 20px; }
     .calc-panel, .calc-results, .content-panel, .faq-card { padding: 24px; }
     .icon-box {
@@ -114,18 +114,14 @@
       background: rgba(255,255,255,0.09); font-size: 20px; margin-bottom: 16px;
     }
     .calc-panel h3, .calc-results h3, .content-panel h3, .faq-card h3 { margin: 0; font-size: 22px; letter-spacing: -0.03em; }
-    .calc-panel p, .calc-results p, .content-panel p, .faq-card p {
-      margin: 12px 0 0; color: var(--muted-2); line-height: 1.8; font-size: 15px;
-    }
-
+    .calc-panel p, .calc-results p, .content-panel p, .faq-card p { margin: 12px 0 0; color: var(--muted-2); line-height: 1.8; font-size: 15px; }
     label { display: block; margin-bottom: 8px; color: var(--muted-2); font-size: 14px; font-weight: 500; }
     input {
-      width: 100%; height: 48px; border-radius: 16px; border: 1px solid var(--border); background: rgba(15,23,42,0.95);
-      color: #fff; padding: 0 14px; font: inherit; outline: none;
+      width: 100%; height: 48px; border-radius: 16px; border: 1px solid var(--border);
+      background: rgba(15,23,42,0.95); color: #fff; padding: 0 14px; font: inherit; outline: none;
     }
     input:focus { border-color: rgba(34,211,238,0.45); box-shadow: 0 0 0 4px rgba(34,211,238,0.08); }
     .field + .field { margin-top: 14px; }
-
     .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
     .mini-card {
       border-radius: 18px; padding: 18px; border: 1px solid var(--border); background: rgba(255,255,255,0.05);
@@ -133,12 +129,10 @@
     .mini-card .label { color: var(--muted); font-size: 14px; }
     .mini-card .big { margin-top: 8px; font-size: 30px; font-weight: 700; letter-spacing: -0.04em; }
     .big.green { color: #86efac; }
-
     .tip-box {
       margin-top: 18px; border-radius: 24px; border: 1px solid var(--border); padding: 22px;
       background: linear-gradient(135deg, rgba(34,211,238,0.1), rgba(52,211,153,0.1));
     }
-
     .ad-box {
       margin-bottom: 18px; padding: 18px; border-radius: 20px; background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.1); box-shadow: none;
@@ -154,17 +148,13 @@
     }
     .ad-space-title { font-weight: 700; font-size: 18px; margin-bottom: 6px; }
     .ad-space-note { font-size: 14px; color: #94a3b8; max-width: 520px; }
-
     .content-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
     .faq-grid { display: grid; gap: 14px; }
-
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.show { opacity: 1; transform: translateY(0); }
-
     footer { border-top: 1px solid var(--border); padding: 26px 0 40px; margin-top: 10px; }
     .footer-inner { display: flex; justify-content: space-between; gap: 24px; align-items: center; }
     .footer-links { display: flex; flex-wrap: wrap; gap: 18px; color: var(--muted); font-size: 14px; }
-
     @media (max-width: 1100px) {
       .hero-grid, .layout, .content-grid { grid-template-columns: 1fr; }
       .result-grid { grid-template-columns: repeat(2, 1fr); }
@@ -268,7 +258,7 @@
             <div class="ad-space">
               <div>
                 <div class="ad-space-title">Ad Space</div>
-                <div class="ad-space-note">The AdSense loader is installed for this page. Replace this box with a live ad unit only after you have a slot ID and the site is approved.</div>
+                <div class="ad-space-note">Replace this box later with a live display unit or rotating ad system.</div>
               </div>
             </div>
           </div>
@@ -308,22 +298,10 @@
         </div>
 
         <div class="content-grid">
-          <div class="card content-panel reveal">
-            <h3>Clarity for readers</h3>
-            <p>Users arriving for content can stay on a cleaner editorial homepage, while users who want a tool can go directly to a dedicated page with less distraction.</p>
-          </div>
-          <div class="card content-panel reveal">
-            <h3>Better site structure</h3>
-            <p>Multiple distinct pages make the site feel more complete and less compressed. That usually helps both trust and navigation.</p>
-          </div>
-          <div class="card content-panel reveal">
-            <h3>More natural ad separation</h3>
-            <p>A dedicated tool page gives you more control over where monetization appears without crowding the main editorial experience.</p>
-          </div>
-          <div class="card content-panel reveal">
-            <h3>Stronger content depth</h3>
-            <p>Publisher sites usually benefit from distinct page purposes: homepage, tools, articles, and informational trust pages.</p>
-          </div>
+          <div class="card content-panel reveal"><h3>Clarity for readers</h3><p>Users arriving for content can stay on a cleaner editorial homepage, while users who want a tool can go directly to a dedicated page with less distraction.</p></div>
+          <div class="card content-panel reveal"><h3>Better site structure</h3><p>Multiple distinct pages make the site feel more complete and less compressed. That usually helps both trust and navigation.</p></div>
+          <div class="card content-panel reveal"><h3>More natural ad separation</h3><p>A dedicated tool page gives you more control over where monetization appears without crowding the main editorial experience.</p></div>
+          <div class="card content-panel reveal"><h3>Stronger content depth</h3><p>Publisher sites usually benefit from distinct page purposes: homepage, tools, articles, and informational trust pages.</p></div>
         </div>
       </div>
     </section>
@@ -404,9 +382,7 @@
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('show');
       });
     }, { threshold: 0.14 });
 
